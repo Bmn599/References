@@ -201,7 +201,7 @@
 </head>
 <body>
   <div class="mobile-header">
-    <h2 class="mobile-header-title">Naloxone Toolkit – References</h2>
+    <div class="mobile-header-title">Naloxone Toolkit – References</div>
   </div>
   <div class="page">
     <header>
