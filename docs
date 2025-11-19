@@ -172,9 +172,8 @@
     @media (max-width: 768px) {
       .ref-links a {
         font-size: 1rem;
-        padding: 0.5rem 0;
+        padding: 1rem 0; /* Increased vertical padding for better tap targets */
         /* Better tap targets */
-        min-height: 44px;
         display: inline-flex;
         align-items: center;
       }
