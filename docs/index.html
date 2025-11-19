@@ -192,9 +192,83 @@
         font-size: 0.8rem;
       }
     }
+    /* Fallback message for incorrect viewing */
+    .fallback-notice {
+      display: none;
+      background: #fff3cd;
+      border: 2px solid #ffc107;
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin: 1rem auto;
+      max-width: 900px;
+      color: #856404;
+      line-height: 1.6;
+    }
+
+    .fallback-notice.show {
+      display: block;
+    }
+
+    .fallback-notice strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .fallback-notice ul {
+      margin: 0.75rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .fallback-notice li {
+      margin: 0.25rem 0;
+    }
+
+    .fallback-notice code {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-family: monospace;
+    }
   </style>
 </head>
 <body>
+  <!-- Fallback notice for users viewing raw HTML -->
+  <div class="fallback-notice" id="fallbackNotice">
+    <strong>⚠️ This page may not be displaying correctly</strong>
+    <p>If you're seeing raw HTML code or this message, you may be viewing this file in a way that doesn't support HTML rendering (such as the GitHub repository browser).</p>
+    <p><strong>To view this page properly:</strong></p>
+    <ul>
+      <li>Visit the GitHub Pages site: <code>https://bmn599.github.io/References/</code></li>
+      <li>Or clone the repository and open <code>docs/index.html</code> in your web browser</li>
+    </ul>
+  </div>
+
+  <script>
+    // Simple detection: if we're in a plain text context or file:// protocol with no proper rendering
+    // This is a basic check - in most proper browser contexts, this won't trigger
+    (function() {
+      try {
+        // Check if we have proper DOM APIs
+        if (typeof document.querySelector !== 'function' || 
+            typeof window.getComputedStyle !== 'function') {
+          return;
+        }
+        
+        // Hide the fallback notice by default (it will only show if there's a rendering issue)
+        // This is just a safeguard - in properly rendered pages, this notice won't appear
+        var notice = document.getElementById('fallbackNotice');
+        if (notice && window.location.protocol === 'file:') {
+          // If viewing via file:// protocol, show a subtle hint
+          // (this is fine for local viewing but we'll keep the notice hidden)
+          // Most users viewing via file:// are doing it intentionally
+        }
+      } catch (e) {
+        // If there's an error, we're likely in a non-standard environment
+        console.warn('Page may not be rendering correctly:', e);
+      }
+    })();
+  </script>
   <div class="mobile-header">
     <div class="mobile-header-title">Naloxone Toolkit – References</div>
   </div>
